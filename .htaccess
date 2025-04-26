@@ -1,0 +1,38 @@
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+
+    RewriteEngine On
+
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
+    # Ensure www redirects to non-www
+    RewriteCond %{HTTP_HOST} ^www.gomobd.com [NC]
+    RewriteRule ^(.*)$ https://gomobd.com/$1 [L,R=301]
+
+    RewriteCond %{HTTP_HOST} ^gomobd.com [NC]
+    RewriteRule ^(.*)$ https://gomobd.com/$1 [L,R=301]
+
+    # Exclude Static Files (CSS, JS, Images, etc.) from Rewrites and Add 'public/' to Paths
+    RewriteCond %{REQUEST_URI} \.(css|js|gif|jpg|jpeg|png|svg|webp|ico|woff|woff2|ttf|otf|eot|mp4|mp3|avi|mov|pdf|json)$ [NC]
+    RewriteRule ^(.*)$ public/$1 [L]
+
+    # Exclude uploads folder from being rewritten
+    RewriteCond %{REQUEST_URI} ^/uploads/ [NC]
+    RewriteRule ^uploads/(.*)$ public/uploads/$1 [L]
+
+    # Exclude real files and directories
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+    # Rewrite all other requests to index.php
+    RewriteRule ^ index.php [L]
+</IfModule>
