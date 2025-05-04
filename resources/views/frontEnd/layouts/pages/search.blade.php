@@ -1,8 +1,8 @@
-@extends('frontEnd.layouts.master') 
-@section('title',$keyword) 
+@extends('frontEnd.layouts.master')
+@section('title',$keyword)
 @push('css')
 <link rel="stylesheet" href="{{asset('public/frontEnd/css/jquery-ui.css')}}" />
-@endpush 
+@endpush
 @section('content')
 <section class="product-section">
     <div class="container">
@@ -40,14 +40,14 @@
                                     <input type="hidden" name="max_price" value="{{request()->get('max_price')}}" />
                                 </form>
                             </div>
-                            
+
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
-        
+
         <div class="row">
             <div class="col-sm-12">
                 <div class="category-product main_product_inner">
@@ -69,7 +69,7 @@
                                 <a href="{{ route('product',$value->slug) }}">
                                     <img src="{{ asset($value->image ? $value->image->image : '') }}" alt="{{$value->name}}" />
                                 </a>
-                              
+
                             </div>
                             <div class="pro_des">
                                 <div class="pro_name">
@@ -77,7 +77,7 @@
                                 </div>
                                 <div class="pro_price">
                                     <p>
-                                        
+
                                         ৳ {{ $value->new_price}} @if($value->old_price) @endif
                                         <del>৳ {{ $value->old_price}}</del>
                                     </p>
@@ -86,13 +86,15 @@
                         </div>
 
                          @if(! $value->prosizes->isEmpty() || ! $value->procolors->isEmpty())
-                        <div class="pro_btn">
-                            
-                            <!--<div class="cart_btn order_button">-->
-                            <!--    <a href="{{ route('product',$value->slug) }}" class="addcartbutton">অর্ডার করুন</a>-->
-                            <!--</div>-->
+                        <div class="pro_btn1">
+
+                            {{-- <div class="cart_btn order_button">
+                                <a href="{{ route('product',$value->slug) }}" class="addcartbutton">অর্ডার করুন</a>
+                            </div> --}}
                             <div class="cart_btn">
-                                <a href="{{ route('product',$value->slug) }}" class="addcartbutton">কার্টে যোগ করন</a>
+                                {{-- <a href="{{ route('product',$value->slug) }}" class="addcartbutton">কার্টে যোগ করন</a> --}}
+                                <a href="{{ route('product', $value->slug) }}" class="addcartbutton">Choose
+                                    color/size</a>
                             </div>
                         </div>
                         @else
@@ -107,12 +109,24 @@
                             <!--    <input type="hidden" name="qty" value="1" />-->
                             <!--    <button type="submit">অর্ডার করুন</button>-->
                             <!--</form>-->
-                            <div class="cart_btn">
+                            {{-- <div class="cart_btn">
                                 <a data-id="{{$value->id}}" class="addcartbutton">কার্টে যোগ করন</a>
+                            </div> --}}
+
+                            <form action="{{ route('cart.store') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="id" value="{{ $value->id }}" />
+                                <input type="hidden" name="qty" value="1" />
+                                <button type="submit">Buy Now</button>
+                                {{-- <button type="submit">অর্ডার করুন</button> --}}
+                            </form>
+                            <div class="cart_btn">
+                                <a data-id="{{ $value->id }}" class="addcartbutton" title="add to cart"><i class="fa-solid fa-cart-shopping"></i></a>
+                                {{-- <a data-id="{{ $value->id }}" class="addcartbutton">কার্টে যোগ করন</a> --}}
                             </div>
                         </div>
                         @endif
-                        
+
                     </div>
                     @endforeach
                 </div>
@@ -122,7 +136,7 @@
             <div class="col-sm-12">
                 <div class="custom_paginate">
                     {{$products->links('pagination::bootstrap-4')}}
-                   
+
                 </div>
             </div>
         </div>

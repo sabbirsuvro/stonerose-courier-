@@ -309,15 +309,52 @@ class FrontendController extends Controller
         $areas = District::where(['district' => $request->id])->pluck('area_name', 'id');
         return response()->json($areas);
     }
+    // public function campaign($slug)
+    // {
+    //     $campaign_data = Campaign::where('slug', $slug)->with('images')->first();
+    //     $product = Product::where('id', $campaign_data->product_id)
+    //         ->where('status', 1)
+    //         ->with('image')
+    //         ->first();
+    //     Cart::instance('shopping')->destroy();
+    //     $cart_count = Cart::instance('shopping')->count();
+    //     if ($cart_count == 0) {
+    //         Cart::instance('shopping')->add([
+    //             'id' => $product->id,
+    //             'name' => $product->name,
+    //             'qty' => 1,
+    //             'price' => $product->new_price,
+    //             'options' => [
+    //                 'slug' => $product->slug,
+    //                 'image' => $product->image->image,
+    //                 'old_price' => $product->old_price,
+    //                 'purchase_price' => $product->purchase_price,
+    //             ],
+    //         ]);
+    //     }
+    //     $shippingcharge = ShippingCharge::where('status', 1)->get();
+    //     $select_charge = ShippingCharge::where('status', 1)->first();
+    //     Session::put('shipping', $select_charge->amount);
+    //     return view('frontEnd.layouts.pages.campaign.campaign', compact('campaign_data', 'product', 'shippingcharge'));
+    // }
+
     public function campaign($slug)
     {
         $campaign_data = Campaign::where('slug', $slug)->with('images')->first();
-        $product = Product::where('id', $campaign_data->product_id)
-            ->where('status', 1)
-            ->with('image')
-            ->first();
+
+        $products = Product::whereIn('id', function($query) use ($campaign_data) {
+            $query->select('product_id')
+                  ->from('campaign_product')
+                  ->where('campaign_id', $campaign_data->id);
+        })->orWhere('id', $campaign_data->product_id)
+          ->where('status', 1)
+          ->with('image')
+          ->get();
+
+
         Cart::instance('shopping')->destroy();
         $cart_count = Cart::instance('shopping')->count();
+        $product = $products->first();
         if ($cart_count == 0) {
             Cart::instance('shopping')->add([
                 'id' => $product->id,
@@ -332,10 +369,11 @@ class FrontendController extends Controller
                 ],
             ]);
         }
+        //return $products;
         $shippingcharge = ShippingCharge::where('status', 1)->get();
         $select_charge = ShippingCharge::where('status', 1)->first();
         Session::put('shipping', $select_charge->amount);
-        return view('frontEnd.layouts.pages.campaign.campaign', compact('campaign_data', 'product', 'shippingcharge'));
+        return view('frontEnd.layouts.pages.campaign.campaign', compact('campaign_data', 'products', 'shippingcharge'));
     }
 
     public function payment_success(Request $request)

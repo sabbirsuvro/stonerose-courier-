@@ -83,6 +83,9 @@ Route::group(['namespace'=>'Frontend', 'middleware' => ['ipcheck','check_refer']
     Route::get('cart/decrement', [ShoppingController::class, 'cart_decrement'])->name('cart.decrement');
 
     Route::get('cart/increment', [ShoppingController::class, 'cart_increment'])->name('cart.increment');
+    Route::get('/cart/change-product', [ShoppingController::class, 'changeProduct'])->name('cart.changeProduct');
+    Route::get('cart/update', [ShoppingController::class, 'cart_update'])->name('cart.update');
+    Route::post('cart/apply-coupon', [ShoppingController::class, 'applyCoupon'])->name('coupon.apply');
 
 });
 

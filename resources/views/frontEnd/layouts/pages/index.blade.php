@@ -192,7 +192,8 @@
                                         <a href="{{ route('product', $value->slug) }}" class="addcartbutton">অর্ডার করুন</a>
                                     </div> --}}
                                     <div class="cart_btn">
-                                        <a href="{{ route('product', $value->slug) }}" class="addcartbutton">Choose color/size</a>
+                                        <a href="{{ route('product', $value->slug) }}" class="addcartbutton">Choose
+                                            color/size</a>
                                         {{-- <a href="{{ route('product', $value->slug) }}" class="addcartbutton"> রঙ/সাইজ
                                             নির্বাচন করুন</a> --}}
                                     </div>
@@ -203,11 +204,11 @@
                                         @csrf
                                         <input type="hidden" name="id" value="{{ $value->id }}" />
                                         <input type="hidden" name="qty" value="1" />
-                                        <button type="submit">Order</button>
+                                        <button type="submit">Buy Now</button>
                                         {{-- <button type="submit">অর্ডার করুন</button> --}}
                                     </form>
                                     <div class="cart_btn">
-                                        <a data-id="{{ $value->id }}" class="addcartbutton">Cart</a>
+                                        <a data-id="{{ $value->id }}" class="addcartbutton" title="add to cart"><i class="fa-solid fa-cart-shopping"></i></a>
                                         {{-- <a data-id="{{ $value->id }}" class="addcartbutton">কার্টে যোগ করন</a> --}}
                                     </div>
                                 </div>
@@ -217,8 +218,9 @@
                 </div>
             </div>
             <div class="col-sm-12 d-flex justify-content-center align-items-center">
-                <a href="{{ route('hotdeals') }}" class="view_more_btn"><i
-                    class="fa-solid fa-eye px-2" style="padding-left:0 !important;"></i>Show More</a>
+                <a href="{{ route('hotdeals') }}" class="view_more_btn">View All</a>
+                {{-- <a href="{{ route('hotdeals') }}" class="view_more_btn"><i
+                    class="fa-solid fa-eye px-2" style="padding-left:0 !important;"></i>Show More</a> --}}
             </div>
         </div>
     </div>
@@ -228,12 +230,16 @@
     <section class="homeproduct">
         <div class="container">
             <div class="row">
-                <div class="col-sm-12">
+                <div class="col-sm-12 d-flex justify-content-between align-items-center">
                     <div class="sec_title">
                         <h3 class="section-title-header">
                             <span class="section-title-name">{{ $homecat->name }}</span>
 
                         </h3>
+                    </div>
+                    <div class="separator mx-3 d-none"></div>
+                    <div class="show_more_btn">
+                        <a href="{{ route('category', $homecat->slug) }}" class="view_more_btn">View All</a>
                     </div>
                 </div>
                 <div class="col-sm-12">
@@ -282,25 +288,27 @@
                                             {{-- <a href="{{ route('product', $value->slug) }}" class="addcartbutton">
                                                 রঙ/সাইজ নির্বাচন করুন
                                             </a> --}}
-                                            <a href="{{ route('product', $value->slug) }}" class="addcartbutton">Choose color/size</a>
+                                            <a href="{{ route('product', $value->slug) }}"
+                                                class="addcartbutton">Choose color/size</a>
                                         </div>
                                     </div>
                                 @else
                                     {{-- <div class="pro_btn"> --}}
-                                        <div class="pro_btn">
-                                            <form action="{{ route('cart.store') }}" method="POST">
-                                                @csrf
-                                                <input type="hidden" name="id" value="{{ $value->id }}" />
-                                                <input type="hidden" name="qty" value="1" />
-                                                <button type="submit">Order</button>
-                                                {{-- <button type="submit">অর্ডার করুন</button> --}}
-                                            </form>
-                                            <div class="cart_btn">
-                                                <a data-id="{{ $value->id }}" class="addcartbutton">Cart</a>
-                                                {{-- <a data-id="{{ $value->id }}" class="addcartbutton">কার্টে যোগ করন</a> --}}
-                                            </div>
+                                    <div class="pro_btn">
+                                        <form action="{{ route('cart.store') }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="id" value="{{ $value->id }}" />
+                                            <input type="hidden" name="qty" value="1" />
+                                            <button type="submit">Buy Now</button>
+                                            {{-- <button type="submit">অর্ডার করুন</button> --}}
+                                        </form>
+                                        <div class="cart_btn">
+                                            <a data-id="{{ $value->id }}" class="addcartbutton" title="add to cart"> <i class="fa-solid fa-cart-shopping"></i></a>
+                                            {{-- <a data-id="{{ $value->id }}" class="addcartbutton"> <i class="fa-solid fa-cart-shopping"></i> Cart</a> --}}
+                                            {{-- <a data-id="{{ $value->id }}" class="addcartbutton">কার্টে যোগ করন</a> --}}
                                         </div>
-                                        {{-- <div class="cart_btn">
+                                    </div>
+                                    {{-- <div class="cart_btn">
                                             <a data-id="{{ $value->id }}" class="addcartbutton">কার্টে যোগ করন</a>
                                         </div> --}}
                                     {{-- </div> --}}
@@ -309,12 +317,12 @@
                         @endforeach
                     </div>
                 </div>
-                <div class="col-sm-12">
+                {{-- <div class="col-sm-12">
                     <div class="show_more_btn">
                         <a href="{{ route('category', $homecat->slug) }}" class="view_more_btn"><i
                                 class="fa-solid fa-eye px-2" style="padding-left:0 !important;"></i>Show More</a>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </section>

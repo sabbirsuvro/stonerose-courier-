@@ -10,6 +10,14 @@ body {
     background: #ececec;
 }
 
+.separator {
+    width: 55%;
+    height: 1.5px;
+    background-color: #1a1a1a;
+    margin-bottom: 10px;
+}
+
+
 /*==== COMMON CSS START ====*/
 @font-face {
     font-family: "Potro Sans Bangla";
@@ -497,7 +505,7 @@ li.Newsletter i {
     position: absolute;
     top: -8px;
     right: -12px;
-    background: #002e45;
+    background: #F44336;
     color: #fff;
     height: 18px;
     width: 18px;
@@ -884,8 +892,8 @@ section.slider-section {
     padding-bottom: 0px;
     padding-top: 0px;
     background: #fff;
-    margin-bottom: 10px;
-    padding: 10px 0;
+    margin-bottom: 30px;
+    padding: 20px 0;
 }
 
 .category-section.section-padding {
@@ -3061,7 +3069,7 @@ section.product-inner {
 }
 .pro_btn {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 2fr 1fr;
     grid-gap: 4px;
 }
 .pro_btn button {
@@ -3095,7 +3103,7 @@ section.product-inner {
 }
 
 .cart_btn a:hover {
-    background: #1b6ab0;
+    background: #c82333;
 }
 
 .pro_btn button:hover {
@@ -3103,7 +3111,7 @@ section.product-inner {
 }
 
 .pro_price del {
-    color: #002e45;
+    color: #c82333;
     margin-right: 5px;
     font-size: 12px;
     font-weight: 400;
@@ -3606,7 +3614,7 @@ a.view_more_btn {
     float: right;
     background: #dc3545;
     text-transform: capitalize;
-    font-size: 15px;
+    font-size: 13px;
     padding: 10px 15px;
     color: #fff;
     font-family: "Lato", sans-serif;
@@ -3826,7 +3834,7 @@ ul.social_link {
 .timer_inner .syotimer-cell {
     width: 38px;
     text-align: center;
-    background: #002e45;
+    background: #C62828;
     color: #fff;
     border-radius: 5px;
     font-size: 15px;
@@ -4036,7 +4044,7 @@ ul.child-category {
 }
 
 .cat_img {
-    height: 210px;
+    aspect-ratio: 2 / 2;
     margin: 0 auto;
 }
 

@@ -239,11 +239,11 @@
                                             @csrf
                                             <input type="hidden" name="id" value="{{ $value->id }}" />
                                             <input type="hidden" name="qty" value="1" />
-                                            <button type="submit">Order</button>
+                                            <button type="submit">Buy Now</button>
                                             {{-- <button type="submit">অর্ডার করুন</button> --}}
                                         </form>
                                         <div class="cart_btn">
-                                            <a data-id="{{ $value->id }}" class="addcartbutton">Cart</a>
+                                            <a data-id="{{ $value->id }}" class="addcartbutton" title="add to cart"><i class="fa-solid fa-cart-shopping"></i></a>
                                             {{-- <a data-id="{{ $value->id }}" class="addcartbutton">কার্টে যোগ করন</a> --}}
                                         </div>
                                     </div>
